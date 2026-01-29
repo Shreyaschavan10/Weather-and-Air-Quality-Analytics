@@ -1,9 +1,8 @@
-
 <p align="center">
   <img src="https://github.com/Shreyaschavan10/Weather-and-Air-Quality-Analytics/blob/main/images/DashBoard.png" width="1000"/>
 </p>
 
-
+👉 **[Click here to interact with dashboard](https://app.powerbi.com/view?r=eyJrIjoiYjJhMTM0OTItNmVmNC00Y2JkLWEzZGQtMTZmN2I4MzViMGVhIiwidCI6ImRjYzhhODY2LWM1ZTMtNDE0Yi04Yzk0LWE4MjA5MTY3Nzc1NCJ9)**
 
 # 🌦️ Weather & Air Quality Analytics Dashboard (Power BI)
 
