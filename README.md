@@ -61,12 +61,6 @@ The project follows **dimensional modeling best practices** to ensure performanc
 
 ---
 
-## 📊 Dashboard Preview
-
-![Dashboard Preview](./dashboard.png)
-
----
-
 ## 🚀 Dashboard Features
 
 - 🌡️ Current weather overview
