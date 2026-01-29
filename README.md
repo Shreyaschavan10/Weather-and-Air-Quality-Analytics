@@ -1,4 +1,10 @@
 
+<p align="center">
+  <img src="https://github.com/Shreyaschavan10/Weather-and-Air-Quality-Analytics/blob/main/images/DashBoard.png" width="1000"/>
+</p>
+
+
+
 # 🌦️ Weather & Air Quality Analytics Dashboard (Power BI)
 
 An end-to-end **data analytics and business intelligence project** that collects weather and air quality data using APIs, models it using a **Star Schema**, and delivers insights through an **automated Power BI dashboard** with daily refresh in Power BI Service.
