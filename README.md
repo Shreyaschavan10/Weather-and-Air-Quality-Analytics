@@ -37,26 +37,81 @@ The workflow includes:
 
 ---
 
-## 🧩 Data Modeling – Star Schema
+## 🧱 Data Model & ETL Design
 
-The project follows **dimensional modeling best practices** to ensure performance and scalability.
+### Data Ingestion (Staging Layer)
+Weather data is collected for multiple cities using a Weather API.  
+Each city’s API response is initially stored in **city-specific staging tables** such as:
 
-### ⭐ Fact Table
-**FactWeather**
-- Temperature
-- Humidity
-- Wind Speed
-- Pressure
-- Visibility
-- Precipitation
-- AQI & pollutant measures
-- Forecast indicators
+- Weather_Pune  
+- Weather_MUM  
+- Weather_Nagpur  
+- Weather_Nasik  
+- Weather_Kolhapur
+- Weather_SN (SambhajiNagar)
 
-### 📐 Dimension Tables
-- **DimDate** – Date, Day, Week, Month
-- **DimCity** – City Name, Location
-- **DimWeatherCondition** – Overcast, Sunny, etc.
-- **DimPollutant** – PM2.5, PM10, CO, NO₂, SO₂, O₃
+These tables represent the **raw API ingestion layer** and are retained for traceability, validation, and debugging purposes.
+
+---
+
+### ETL & Data Transformation
+The city-level staging tables are **referenced in Power Query** and transformed to create consolidated reporting tables.  
+Key ETL steps include:
+- Selecting relevant weather and air-quality fields  
+- Standardizing column names and data types  
+- Combining city data into unified structures  
+- Creating separate fact tables based on granularity  
+
+The transformed output tables are:
+- `Current` – real-time weather and air quality data  
+- `Forecast_Day` – daily forecast and astronomical data  
+- `Forecast_Hours` – hourly forecast and precipitation probability  
+
+Only these consolidated tables are used for reporting and visualization.
+
+---
+
+### Star Schema Design (Reporting Layer)
+
+The final reporting model follows a **Star Schema** design.
+
+#### Dimension Table
+**Locations**
+- Central dimension table containing city/location information
+- Used to filter and slice all weather data
+
+#### Fact Tables
+- **Current**
+  - AQI, PM2.5, PM10, gaseous pollutants
+  - Cloud cover and weather conditions
+
+- **Forecast_Day**
+  - Daily weather forecast
+  - Sunrise, sunset, moon phase, temperature metrics
+
+- **Forecast_Hours**
+  - Hourly weather forecast
+  - Hourly AQI and chance of rain
+
+All fact tables are connected to the **Locations** dimension using one-to-many relationships, enabling efficient filtering and optimized query performance.
+
+---
+
+### Measures Layer
+A dedicated `_measures` table is used to store reusable DAX measures such as:
+- AQI Status
+- AQI Health Suggestions
+- Chance of Rain
+
+This approach ensures a clean semantic layer and avoids duplication of business logic across visuals.
+
+---
+
+### Design Rationale
+- Separating staging and reporting layers improves maintainability
+- Star schema optimizes Power BI performance and simplifies analysis
+- Centralized measures ensure consistent calculations across the dashboard
+- The model is scalable and can easily support additional cities
 
 ---
 
